@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@material-ui/core": "^4.11.3",
     "bowser": "^2.11.0",
     "classnames": "^2.2.6",
     "next": "10.0.7",

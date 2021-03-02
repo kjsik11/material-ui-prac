@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+import Box from '@material-ui/core/Box';
 
+import { Button } from '@material-ui/core';
 // importing components
 import { Head } from '@components/core';
 
@@ -36,18 +38,11 @@ const Home: React.FC = () => {
         <title>My Home Page</title>
       </Head>
       <Root>
-        hello world
-        <div className="w-10 h-10 bg-black mx-auto my-4" />
-        <button
-          className="bg-black text-white py-2 px-4 rounded-lg"
-          onClick={() => handleFetch()}
-          disabled={loading}
-        >
-          get data
-        </button>
-        <p className="text-lg">
-          {loading ? 'loading...' : JSON.stringify(data, null, 2)}
-        </p>
+        <Box component="span" clone>
+          <Button variant="contained" color="primary">
+            test
+          </Button>
+        </Box>
       </Root>
     </>
   );
