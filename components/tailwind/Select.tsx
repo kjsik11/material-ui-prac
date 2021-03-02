@@ -1,3 +1,4 @@
+import { Transition } from '@headlessui/react';
 import React from 'react';
 import styled from 'styled-components';
 import SelectItem from './SelectItem';
@@ -40,29 +41,41 @@ const Select: React.FC<Props> = ({ className, items }) => {
             </svg>
           </span>
         </button>
-        {openItem && (
-          <div className="mt-1 w-full rounded-md bg-white shadow-lg">
-            <ul
-              tabIndex={-1}
-              role="listbox"
-              aria-labelledby="listbox-label"
-              aria-activedescendant="listbox-item-3"
-              className="max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm"
-            >
-              {items.map((item, idx) => (
-                <SelectItem
-                  value={item}
-                  key={`select-item-${idx}`}
-                  setSelectItem={setSelectItem}
-                  close={setOpenItem}
-                  selected={selectItem === item}
+
+        <Transition show={openItem} className="bg-white">
+          <Transition.Child
+            enter="transition-opacity ease-linear duration-75 transform"
+            enterFrom="opacity-0"
+            enterTo="opacity-100"
+            leave="transition-opacity ease-linear duration-75 transform"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+          >
+            {openItem && (
+              <div className="absolute z-50 mt-1 w-full rounded-md bg-white shadow-lg">
+                <ul
+                  tabIndex={-1}
+                  role="listbox"
+                  aria-labelledby="listbox-label"
+                  aria-activedescendant="listbox-item-3"
+                  className="max-h-60 rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm"
                 >
-                  {item}
-                </SelectItem>
-              ))}
-            </ul>
-          </div>
-        )}
+                  {items.map((item, idx) => (
+                    <SelectItem
+                      value={item}
+                      key={`select-item-${idx}`}
+                      setSelectItem={setSelectItem}
+                      close={setOpenItem}
+                      selected={selectItem === item}
+                    >
+                      {item}
+                    </SelectItem>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </Transition.Child>
+        </Transition>
       </div>
     </Root>
   );
