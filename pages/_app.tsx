@@ -1,5 +1,6 @@
 import '@assets/main.css';
 import 'nprogress/nprogress.css';
+import ManagedUIContext from '@components/context';
 
 import React from 'react';
 import type { AppProps } from 'next/app';
@@ -21,8 +22,10 @@ Router.events.on('routeChangeError', () => NProgress.done());
 const App: React.FC<AppProps> = ({ Component, pageProps }) => {
   return (
     <>
-      <Head />
-      <Component {...pageProps} />
+      <ManagedUIContext>
+        <Head />
+        <Component {...pageProps} />
+      </ManagedUIContext>
     </>
   );
 };
